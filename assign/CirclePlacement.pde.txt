@@ -1,0 +1,53 @@
+https://powcoder.com
+代写代考加微信 powcoder
+Assignment Project Exam Help
+Add WeChat powcoder
+https://powcoder.com
+代写代考加微信 powcoder
+Assignment Project Exam Help
+Add WeChat powcoder
+import java.util.Arrays; 
+
+Bunch OrderedCircles;
+
+boolean computed;
+int drawWhich;
+
+int numCircles=2;
+
+int w=800;
+int h=600;
+
+int cx=w/2; // always width/2
+int cy=h/2; // always height/2
+
+PFont f;
+
+void setup()
+{
+  computed=false;
+
+  size(800,600);
+  f = createFont("Arial",16,true);
+ 
+  
+  //int[] radii={10,40,25}; 
+  //int[] radii={10,40,25,15,18};
+  int[] radii={20,50}; 
+  OrderedCircles = new Bunch(radii);
+}
+
+void draw()
+{
+  if (!computed)
+  {
+    OrderedCircles.orderedPlace();
+    computed=true;
+    background(255);
+    OrderedCircles.draw();
+    fill(0);
+    textFont(f,16);
+    text("ORDER-BASED PLACEMENT", 50,20);
+    text("Bounding circle radius: "+OrderedCircles.computeBoundary(), 50,50);
+  }
+}

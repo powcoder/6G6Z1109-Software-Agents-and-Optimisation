@@ -1,0 +1,88 @@
+https://powcoder.com
+代写代考加微信 powcoder
+Assignment Project Exam Help
+Add WeChat powcoder
+https://powcoder.com
+代写代考加微信 powcoder
+Assignment Project Exam Help
+Add WeChat powcoder
+import java.util.Collections;
+import java.util.Arrays; 
+
+public class Bunch
+{
+  Circle [] Circles;
+  int numCircles;
+  Point[] openPoints = new Point[0];
+  
+  Bunch (int[] radii) // specified circles
+  {
+    Circles = new Circle[radii.length];
+    numCircles=radii.length;
+    for (int i=0; i<numCircles; i++)
+    {
+      Circles[i]=new Circle(radii[i], i);
+    }
+  }
+  
+  public void draw()
+  {
+    float bound=computeBoundary();
+    stroke(0);
+    fill(255);
+    ellipse(cx,cy, bound*2, bound*2);
+    
+    for (int i=0; i<numCircles; i++)
+    {
+      if (Circles[i].computed)
+        Circles[i].draw();
+    }
+    for (int i=0; i<openPoints.length; i++)
+    {
+      stroke(0,255,0);
+      fill(0,255,0);
+      point(openPoints[i].x,openPoints[i].y);
+    }
+  }
+
+  
+  public void orderedPlace()
+  {
+    for (int i=0; i<numCircles; i++)
+    {
+      if (i==0)
+      {
+         Circles[i].x=cx;
+         Circles[i].y=cy;
+         Circles[i].computed=true;
+      }
+      else
+        openPoints=Circles[i].computePosition(Circles);
+    }
+  }
+
+  
+  float computeBoundary () 
+  {
+    // Find bounding circle for circles
+    int i;
+    float outer_limit=0;
+    int furthest=0;
+    float distance=0;
+  
+    for (i=0; i<numCircles; i++)
+    {
+      if (Circles[i].computed)
+      {
+        distance=dist(cx, cy, Circles[i].x, Circles[i].y)+Circles[i].radius;
+        if (distance >= outer_limit)
+        {
+          outer_limit=distance;
+          furthest=i;
+        }
+    
+      }
+    }
+    return(outer_limit);
+  }
+} 
